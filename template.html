@@ -49,8 +49,10 @@
 
 
 #export welcome
+<pre id="hoogle-error" class="bg-danger" style="display: none;"></pre>
 
 
 #export parseError
-<h1>$!errFormat$</h1>
-<h2>$&errMessage$</h2>
+<!-- $!errFormat$ -->
+<!-- $&errMessage$ -->
+<pre id="hoogle-error" class="bg-danger" style="display: block;">$!errMessage$</pre>

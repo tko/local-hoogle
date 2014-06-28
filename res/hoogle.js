@@ -21,6 +21,8 @@ $(function () {
       var query = $(this).val();
       if (query.length >= optTypeaheadMinLength) {
         hoogle(query);
+      } else {
+        $('#hoogle-error').hide();
       }
     });
   }
@@ -65,11 +67,15 @@ var hoogle = makeHoogle({
     });
 
     table.clear().draw();
+    $('#hoogle-error').hide();
 
     return table;
   },
   add: function(results, table) {
     table.rows.add(results).draw();
+  },
+  error: function(parseError, table) {
+    $('#hoogle-error').text(parseError).show();
   }
 });
 
@@ -97,7 +103,9 @@ function makeHoogle(self) {
         return;
       }
 
-      if (data.results.length) {
+      if (data.parseError) {
+        self.error(data.parseError, ctx);
+      } else if (data.results.length) {
         self.add(data.results.map(postprocessInPlace), ctx);
 
         var next = (start|0) + data.results.length + 1;

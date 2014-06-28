@@ -9,6 +9,11 @@ body, div.container, div.container div.row, #left, #right {
     height: 34px; /* bootstrap @input-height-base */
 }
 
+#hoogle-error {
+    position: absolute;
+    z-index: 1;
+}
+
 #hoogle-table_wrapper {
     position: absolute;
     top: 34px;  /* #hoogle-input height */
