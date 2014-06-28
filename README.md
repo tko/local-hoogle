@@ -23,4 +23,3 @@ External dependencies (CDN):
 * Bootstrap
 * jQuery
 * jQuery DataTables
-* Handlebars

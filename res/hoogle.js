@@ -26,7 +26,11 @@ $(function () {
   }
 });
 
-var renderHoogleLink = Handlebars.compile(tmplHoogleLink);
+var renderHoogleLink = function(row) {
+  return String(tmplHoogleLink).replace(/{{\s*(\S+?)\s*}}/g, function(m, name) {
+    return escapeHtml(row[name]);
+  });
+}
 
 var hoogle = makeHoogle({
   reset: function() {
@@ -117,4 +121,19 @@ function postprocessInPlace(item) {
   // function, data, type, class, module, package, keyword
   item.sortByKind = "FDTCMPK".indexOf(item.kind);
   return item;
+}
+
+var entityMap = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': '&quot;',
+  "'": '&#39;',
+  "/": '&#x2F;'
+};
+
+function escapeHtml(string) {
+  return String(string).replace(/[&<>"'\/]/g, function(s) {
+    return entityMap[s];
+  });
 }
